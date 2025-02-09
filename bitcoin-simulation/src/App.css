@@ -1,14 +1,28 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-    scroll-behavior: smooth;
-}
-
-a{
-    text-decoration: none;
-    color: gold;
-}
+.top-btn {
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--darkgrey);
+    border: 2px solid var(--blue);
+    font-size: 2rem;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    cursor: pointer;
+    color: var(--white);
+  }
+  
+  .grey-wrapper {
+    background-color: var(--darkgrey);
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    border-radius: 1rem;
+    width: 90%;
+    display: block;
+    margin: 1.5rem auto;
+  }
+  
