@@ -1,5 +1,7 @@
 // import React from "react";
 
+// import { Link } from "lucide-react";
+
 const TradingDashboard = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
@@ -17,6 +19,7 @@ const TradingDashboard = () => {
             <div className="mt-4 flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                 Live transactions
+                
               </button>
               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
                Dashboard
