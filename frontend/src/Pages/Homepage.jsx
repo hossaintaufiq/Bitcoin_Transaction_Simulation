@@ -1,6 +1,6 @@
-// import React from "react";
+import FAQSection from "../Components/FAQSection";
 
-// import { Link } from "lucide-react";
+
 
 const TradingDashboard = () => {
   return (
@@ -14,15 +14,18 @@ const TradingDashboard = () => {
           </h1>
           <div className="bg-gray-100 p-4 rounded-lg">
             <p className="text-gray-600">Your Estimated Balance ➔</p>
-            <p className="text-2xl font-bold text-gray-800">0.05 USD* ~ $0.053/20245</p>
-            <p className="text-sm text-gray-500 mt-2">Today’s Pnt. $0.00 (+1.93%)</p>
+            <p className="text-2xl font-bold text-gray-800">
+              0.05 USD* ~ $0.053/20245
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+              Today’s Pnt. $0.00 (+1.93%)
+            </p>
             <div className="mt-4 flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
                 Live transactions
-                
               </button>
               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-               Dashboard
+                Dashboard
               </button>
             </div>
           </div>
@@ -33,21 +36,51 @@ const TradingDashboard = () => {
           <h2 className="text-xl font-bold text-gray-800 mb-4">Popular</h2>
           <div className="space-y-4">
             {[
-              { name: "Bitcoin", symbol: "BTC", price: "$96,640.82", change: "-1.85%" },
-              { name: "Ethereum", symbol: "ETH", price: "$2,776.11", change: "-1.16%" },
-              { name: "BNB", symbol: "BNB", price: "$658.63", change: "-0.10%" },
+              {
+                name: "Bitcoin",
+                symbol: "BTC",
+                price: "$96,640.82",
+                change: "-1.85%",
+              },
+              {
+                name: "Ethereum",
+                symbol: "ETH",
+                price: "$2,776.11",
+                change: "-1.16%",
+              },
+              {
+                name: "BNB",
+                symbol: "BNB",
+                price: "$658.63",
+                change: "-0.10%",
+              },
               { name: "XRP", symbol: "XRP", price: "$2.59", change: "-1.18%" },
-              { name: "Solana", symbol: "SOL", price: "$173.42", change: "-0.88%" },
+              {
+                name: "Solana",
+                symbol: "SOL",
+                price: "$173.42",
+                change: "-0.88%",
+              },
             ].map((coin) => (
               <div key={coin.symbol} className="bg-gray-100 p-4 rounded-lg">
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-lg font-bold text-gray-800">{coin.name}</p>
+                    <p className="text-lg font-bold text-gray-800">
+                      {coin.name}
+                    </p>
                     <p className="text-sm text-gray-500">{coin.symbol}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-gray-800">{coin.price}</p>
-                    <p className={`text-sm ${coin.change.startsWith("-") ? "text-red-500" : "text-green-500"}`}>
+                    <p className="text-lg font-bold text-gray-800">
+                      {coin.price}
+                    </p>
+                    <p
+                      className={`text-sm ${
+                        coin.change.startsWith("-")
+                          ? "text-red-500"
+                          : "text-green-500"
+                      }`}
+                    >
                       {coin.change}
                     </p>
                   </div>
@@ -67,15 +100,18 @@ const TradingDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             {
-              title: "ByBit CEO Ben Zhou Backs CZ’s Security Approach, Defends Withdrawal Decision",
+              title:
+                "ByBit CEO Ben Zhou Backs CZ’s Security Approach, Defends Withdrawal Decision",
               source: "ByBit",
             },
             {
-              title: "CZ: My Guiding Principle is Always to Lean on The Safer Side",
+              title:
+                "CZ: My Guiding Principle is Always to Lean on The Safer Side",
               source: "CZ",
             },
             {
-              title: "Ethereum News: Why Is Ethereum (ETH) Price Down Today? Key Factors Behind the Drop",
+              title:
+                "Ethereum News: Why Is Ethereum (ETH) Price Down Today? Key Factors Behind the Drop",
               source: "Ethereum News",
             },
             {
@@ -93,8 +129,14 @@ const TradingDashboard = () => {
           View All News &gt;
         </button>
       </div>
+      {/* FAQ Section Added Below */}
+      <FAQSection />
+
+      
     </div>
   );
 };
 
 export default TradingDashboard;
+
+
