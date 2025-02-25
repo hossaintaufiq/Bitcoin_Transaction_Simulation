@@ -16,7 +16,7 @@ function App() {
       <div className="pt-16 w-full min-h-[calc(100vh-8rem)]">
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/dashboard" element={<DashBoard/>} />
+          <Route path="/profile" element={<DashBoard/>} />
           <Route path="/live-transactions" element={<LiveTransaction/>} />
           <Route path="/wallets" element={<Wallets/>} />
           <Route path="/market" element={<MarketData/>} />
