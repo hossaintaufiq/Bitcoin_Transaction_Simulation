@@ -20,7 +20,7 @@ const DashBoard = () => {
             <FaWallet className="mr-3" /> Wallets
           </a>
           <a href="#" className="flex items-center px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-            <FaUsers className="mr-3" /> Users
+            <FaUsers className="mr-3" /> Transcations
           </a>
           <a href="#" className="flex items-center px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
             <FaCog className="mr-3" /> Settings

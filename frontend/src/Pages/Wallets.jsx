@@ -1,32 +1,19 @@
-// import React from "react";
-import { FaBitcoin, FaEthereum, FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { FaCoins, FaWallet, FaExchangeAlt } from "react-icons/fa";
 
 const Wallets = () => {
-  // Sample wallet data
-  const wallets = [
+  // Static data for My Assets
+  const assets = [
     {
       id: 1,
-      name: "Bitcoin Wallet",
-      symbol: "BTC",
-      balance: 0.5,
-      address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
-      icon: <FaBitcoin className="text-yellow-500" />,
+      name: "BitCoin",
+      amount: 0.0164851,
+      value: 0.04,
     },
     {
       id: 2,
-      name: "Ethereum Wallet",
-      symbol: "ETH",
-      balance: 3.2,
-      address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-      icon: <FaEthereum className="text-purple-500" />,
-    },
-    {
-      id: 3,
-      name: "Cardano Wallet",
-      symbol: "ADA",
-      balance: 500,
-      address: "addr1q9...",
-      icon: <span className="text-blue-500">ADA</span>,
+      name: "1MBABYDOGE",
+      amount: 6.0,
+      value: 0.01,
     },
   ];
 
@@ -34,42 +21,98 @@ const Wallets = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Wallets</h1>
 
-      {/* Wallet Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {wallets.map((wallet) => (
-          <div
-            key={wallet.id}
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-          >
-            <div className="flex items-center space-x-4 mb-4">
-              <div className="text-3xl">{wallet.icon}</div>
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {wallet.name}
-                </h2>
-                <p className="text-sm text-gray-500">{wallet.symbol}</p>
-              </div>
-            </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {wallet.balance} {wallet.symbol}
-            </p>
-            <p className="text-sm text-gray-500 truncate">{wallet.address}</p>
-            <div className="mt-4 flex space-x-4">
-              <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                <FaArrowRight className="mr-2" />
-                Send
-              </button>
-              <button className="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
-                <FaArrowLeft className="mr-2" />
-                Receive
-              </button>
-            </div>
-          </div>
-        ))}
+      {/* Deposit | Withdraw | Transfer Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <div className="flex space-x-4">
+          <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+            <FaCoins className="mr-2" />
+            Deposit
+          </button>
+          <button className="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+            <FaWallet className="mr-2" />
+            Withdraw
+          </button>
+          <button className="flex items-center px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition">
+            <FaExchangeAlt className="mr-2" />
+            Transfer
+          </button>
+        </div>
+      </div>
+
+      {/* Estimated Balance Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          Estimated Balance
+        </h2>
+        <p className="text-2xl font-bold text-gray-800">
+          0.04863102 <span className="text-blue-500">USDT</span>
+        </p>
+        <p className="text-gray-600">$0.05</p>
+        <p className="text-sm text-gray-500 mt-2">
+          Today’s Pnt. <span className="text-red-500">$0.00 (-3.80%)</span>
+        </p>
+      </div>
+
+      {/* My Assets Section */}
+      <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+        <h2 className="text-xl font-semibold text-gray-700 p-6">My Assets</h2>
+        <table className="min-w-full">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Coin
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Amount
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Value
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {assets.map((asset) => (
+              <tr key={asset.id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  <div className="flex items-center space-x-3">
+                    <div>
+                      <p className="font-semibold">{asset.name}</p>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  {asset.amount}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  ${asset.value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Hide Assets and Today’s Pnt. Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="flex items-center space-x-4">
+          <input
+            type="checkbox"
+            className="form-checkbox h-4 w-4 text-blue-500 rounded"
+          />
+          <p className="text-sm text-gray-700">Hide assets 1 USD</p>
+        </div>
+        <div className="mt-4">
+          <p className="text-sm text-gray-700">
+            Today’s Pnt. <span className="text-green-500">+ $0.00</span>
+          </p>
+        </div>
       </div>
 
       {/* Transactions Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden mt-8">
+        <h2 className="text-xl font-semibold text-gray-700 p-6">
+          Transactions
+        </h2>
         <table className="min-w-full">
           <thead className="bg-gray-50">
             <tr>
