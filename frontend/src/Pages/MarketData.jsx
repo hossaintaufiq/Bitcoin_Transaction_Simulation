@@ -53,6 +53,8 @@ const MarketData = () => {
           symbol: crypto.symbol.toUpperCase(),
           price: crypto.current_price,
           change: crypto.price_change_percentage_24h,
+          volume: crypto.total_volume,
+          marketCap: crypto.market_cap,
           icon:
             crypto.symbol === "btc" ? (
               <FaBitcoin className="text-yellow-500" />
@@ -157,6 +159,12 @@ const MarketData = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 24h Change
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                24h Volume
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Market Cap
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -188,6 +196,12 @@ const MarketData = () => {
                     {crypto.change > 0 ? <FaArrowUp /> : <FaArrowDown />}
                     {Math.abs(crypto.change).toFixed(2)}%
                   </span>
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  ${crypto.volume.toLocaleString()}
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-900">
+                  ${crypto.marketCap.toLocaleString()}
                 </td>
               </tr>
             ))}
