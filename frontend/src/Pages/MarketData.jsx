@@ -1,42 +1,116 @@
-// import React from "react";
+
 import { FaBitcoin, FaEthereum, FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { Line } from "react-chartjs-2";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const MarketData = () => {
-  // Sample market data
-  const cryptocurrencies = [
-    {
-      id: 1,
-      name: "Bitcoin",
-      symbol: "BTC",
-      price: 45000,
-      change: 2.5,
-      icon: <FaBitcoin className="text-yellow-500" />,
-    },
-    {
-      id: 2,
-      name: "Ethereum",
-      symbol: "ETH",
-      price: 3000,
-      change: -1.2,
-      icon: <FaEthereum className="text-purple-500" />,
-    },
-    {
-      id: 3,
-      name: "Cardano",
-      symbol: "ADA",
-      price: 2.5,
-      change: 0.8,
-      icon: <span className="text-blue-500">ADA</span>,
-    },
-    {
-      id: 4,
-      name: "Solana",
-      symbol: "SOL",
-      price: 150,
-      change: 3.7,
-      icon: <span className="text-green-500">SOL</span>,
-    },
-  ];
+  const [cryptocurrencies, setCryptocurrencies] = useState([]);
+  const [bitcoinChartData, setBitcoinChartData] = useState({});
+
+  // Fetch live market data from CoinGecko API
+  useEffect(() => {
+    const fetchMarketData = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/markets",
+          {
+            params: {
+              vs_currency: "usd",
+              ids: "bitcoin,ethereum,cardano,solana",
+              order: "market_cap_desc",
+              per_page: 10,
+              page: 1,
+              sparkline: false,
+            },
+          }
+        );
+
+        const data = response.data.map((crypto) => ({
+          id: crypto.id,
+          name: crypto.name,
+          symbol: crypto.symbol.toUpperCase(),
+          price: crypto.current_price,
+          change: crypto.price_change_percentage_24h,
+          icon:
+            crypto.symbol === "btc" ? (
+              <FaBitcoin className="text-yellow-500" />
+            ) : crypto.symbol === "eth" ? (
+              <FaEthereum className="text-purple-500" />
+            ) : (
+              <span className="text-blue-500">
+                {crypto.symbol.toUpperCase()}
+              </span>
+            ),
+        }));
+
+        setCryptocurrencies(data);
+      } catch (error) {
+        console.error("Error fetching market data:", error);
+      }
+    };
+
+    fetchMarketData();
+  }, []);
+
+  // Fetch Bitcoin chart data
+  useEffect(() => {
+    const fetchBitcoinChartData = async () => {
+      try {
+        const response = await axios.get(
+          "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
+          {
+            params: {
+              vs_currency: "usd",
+              days: "7",
+            },
+          }
+        );
+
+        const chartData = {
+          labels: response.data.prices.map((price) =>
+            new Date(price[0]).toLocaleDateString()
+          ),
+          datasets: [
+            {
+              label: "Bitcoin Price",
+              data: response.data.prices.map((price) => price[1]),
+              borderColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              fill: true,
+            },
+          ],
+        };
+
+        setBitcoinChartData(chartData);
+      } catch (error) {
+        console.error("Error fetching Bitcoin chart data:", error);
+      }
+    };
+
+    fetchBitcoinChartData();
+  }, []);
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -46,54 +120,31 @@ const MarketData = () => {
       <div className="mb-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">
-            Bitcoin Price Chart
+            Bitcoin Price Chart (Last 7 Days)
           </h2>
           <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-            <span className="text-gray-500">Chart Placeholder</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Market Trends Section */}
-      <div className="mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">
-            Market Trends
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cryptocurrencies.map((crypto) => (
-              <div
-                key={crypto.id}
-                className="p-4 border rounded-lg hover:shadow-lg transition-shadow"
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="text-2xl">{crypto.icon}</div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
-                      {crypto.name}
-                    </h3>
-                    <p className="text-sm text-gray-500">{crypto.symbol}</p>
-                  </div>
-                </div>
-                <p className="text-xl font-bold text-gray-900">
-                  ${crypto.price.toLocaleString()}
-                </p>
-                <p
-                  className={`text-sm ${
-                    crypto.change > 0 ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {crypto.change > 0 ? <FaArrowUp /> : <FaArrowDown />}
-                  {Math.abs(crypto.change)}%
-                </p>
-              </div>
-            ))}
+            {bitcoinChartData.labels ? (
+              <Line
+                data={bitcoinChartData}
+                options={{
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                  },
+                }}
+              />
+            ) : (
+              <span className="text-gray-500">Loading Chart...</span>
+            )}
           </div>
         </div>
       </div>
 
       {/* Cryptocurrencies Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
         <table className="min-w-full">
           <thead className="bg-gray-50">
             <tr>
@@ -106,17 +157,14 @@ const MarketData = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 24h Change
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Market Cap
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Volume (24h)
-              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
             {cryptocurrencies.map((crypto) => (
-              <tr key={crypto.id} className="hover:bg-gray-50 transition-colors">
+              <tr
+                key={crypto.id}
+                className="hover:bg-gray-50 transition-colors"
+              >
                 <td className="px-6 py-4 text-sm text-gray-900">
                   <div className="flex items-center space-x-3">
                     <div className="text-xl">{crypto.icon}</div>
@@ -138,19 +186,49 @@ const MarketData = () => {
                     }`}
                   >
                     {crypto.change > 0 ? <FaArrowUp /> : <FaArrowDown />}
-                    {Math.abs(crypto.change)}%
+                    {Math.abs(crypto.change).toFixed(2)}%
                   </span>
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900">
-                  $1,000,000,000
-                </td>
-                <td className="px-6 py-4 text-sm text-gray-900">
-                  $500,000,000
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Market Trends Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          Market Trends
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cryptocurrencies.map((crypto) => (
+            <div
+              key={crypto.id}
+              className="p-4 border rounded-lg hover:shadow-lg transition-shadow"
+            >
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="text-2xl">{crypto.icon}</div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800">
+                    {crypto.name}
+                  </h3>
+                  <p className="text-sm text-gray-500">{crypto.symbol}</p>
+                </div>
+              </div>
+              <p className="text-xl font-bold text-gray-900">
+                ${crypto.price.toLocaleString()}
+              </p>
+              <p
+                className={`text-sm ${
+                  crypto.change > 0 ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {crypto.change > 0 ? <FaArrowUp /> : <FaArrowDown />}
+                {Math.abs(crypto.change).toFixed(2)}%
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
