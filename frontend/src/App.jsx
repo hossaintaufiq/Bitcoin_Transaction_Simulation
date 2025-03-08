@@ -7,8 +7,9 @@ import LiveTransaction from "./Pages/LiveTransaction";
 import Wallets from "./Pages/Wallets";
 import MarketData from "./Pages/MarketData";
 import Footer from "./Pages/Footer";
+import SignIn from "./Authentication/SignIn";
 // import SignIn from "./Authentication/SignIn";
-// import SignUp from "./Authentication/SignUp";
+import SignUp from "./Authentication/SignUp";
 // import { useState } from "react";
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
           <Route path="/live-transactions" element={<LiveTransaction/>} />
            <Route path="/wallets" element={<Wallets/>} /> 
           <Route path="/market" element={<MarketData/>} />
+          <Route path="/signIn" element={<SignIn/>} />
+          <Route path="/signUp" element={<SignUp/>} />
 
 {/* 
           <Route path="/signin" element={<SignIn setIsLoggedIn={setIsLoggedIn} />} />

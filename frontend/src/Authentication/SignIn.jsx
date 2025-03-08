@@ -11,9 +11,9 @@ const SignIn = ({ setIsLoggedIn }) => {
   const handleSignIn = (e) => {
     e.preventDefault();
     
-    // Check if the email and password match the demo credentials
+    
     if (email === "demo@user.com" && password === "password123") {
-      setIsLoggedIn(true); // Simulating login
+      setIsLoggedIn(true); // login
       navigate("/profile"); // Redirect to profile page
     } else {
       setError("Invalid email or password. Try demo@user.com / password123");
