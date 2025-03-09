@@ -27,7 +27,8 @@ ChartJS.register(
 
 const MarketData = () => {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
-  const [bitcoinChartData, setBitcoinChartData] = useState({});
+  const [chartData, setChartData] = useState({});
+  const [selectedCoin, setSelectedCoin] = useState("bitcoin"); // Default to Bitcoin
 
   // Fetch live market data from CoinGecko API
   useEffect(() => {
@@ -76,12 +77,12 @@ const MarketData = () => {
     fetchMarketData();
   }, []);
 
-  // Fetch Bitcoin chart data
+  // Fetch chart data for the selected coin
   useEffect(() => {
-    const fetchBitcoinChartData = async () => {
+    const fetchChartData = async () => {
       try {
         const response = await axios.get(
-          "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
+          `https://api.coingecko.com/api/v3/coins/${selectedCoin}/market_chart`,
           {
             params: {
               vs_currency: "usd",
@@ -96,7 +97,7 @@ const MarketData = () => {
           ),
           datasets: [
             {
-              label: "Bitcoin Price",
+              label: `${selectedCoin.toUpperCase()} Price`,
               data: response.data.prices.map((price) => price[1]),
               borderColor: "rgba(75, 192, 192, 1)",
               backgroundColor: "rgba(75, 192, 192, 0.2)",
@@ -105,29 +106,42 @@ const MarketData = () => {
           ],
         };
 
-        setBitcoinChartData(chartData);
+        setChartData(chartData);
       } catch (error) {
-        console.error("Error fetching Bitcoin chart data:", error);
+        console.error("Error fetching chart data:", error);
       }
     };
 
-    fetchBitcoinChartData();
-  }, []);
+    fetchChartData();
+  }, [selectedCoin]);
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Market Data</h1>
 
       {/* Price Charts Section */}
-      <div className="mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">
-            Bitcoin Price Chart (Last 7 Days)
-          </h2>
+      <div className="mb-8 ">
+        <div className="bg-white p-6 rounded-lg shadow-md ">
+          <div className="flex justify-between items-center mb-4 ">
+            <h2 className="text-xl font-semibold text-gray-700">
+              {selectedCoin.toUpperCase()} Price Chart (Last 7 Days)
+            </h2>
+            <select
+              value={selectedCoin}
+              onChange={(e) => setSelectedCoin(e.target.value)}
+              className="p-2 border rounded-lg"
+            >
+              {cryptocurrencies.map((crypto) => (
+                <option key={crypto.id} value={crypto.id}>
+                  {crypto.name} ({crypto.symbol})
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-            {bitcoinChartData.labels ? (
+            {chartData.labels ? (
               <Line
-                data={bitcoinChartData}
+                data={chartData}
                 options={{
                   responsive: true,
                   maintainAspectRatio: false,
