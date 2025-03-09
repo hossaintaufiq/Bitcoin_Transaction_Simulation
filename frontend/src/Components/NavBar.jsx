@@ -27,6 +27,7 @@ const NavBar = () => {
           {[
             { path: "/", label: "Home" },
             { path: "/market", label: "Markets" },
+            { path: "/trade", label: "Trade" },
             { path: "/live-transactions", label: "Transactions" },
             { path: "/wallets", label: "Wallets" },
             
@@ -68,6 +69,7 @@ const NavBar = () => {
           {[
             { path: "/", label: "Home" },
             { path: "/market", label: "Markets" },
+            { path: "/trade", label: "Trade" },
             { path: "/live-transactions", label: "Transactions" },
             { path: "/wallets", label: "Wallets" },
             

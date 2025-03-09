@@ -21,6 +21,21 @@ const Wallets = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Wallets</h1>
 
+      
+
+      {/* Estimated Balance Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          Estimated Balance
+        </h2>
+        <p className="text-2xl font-bold text-gray-800">
+          0.04863102 <span className="text-blue-500">USDT</span>
+        </p>
+        <p className="text-gray-600">$0.05</p>
+        <p className="text-sm text-gray-500 mt-2">
+          Today’s Pnt. <span className="text-red-500">$0.00 (-3.80%)</span>
+        </p>
+      </div>
       {/* Deposit | Withdraw | Transfer Section */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
         <div className="flex space-x-4">
@@ -37,20 +52,6 @@ const Wallets = () => {
             Transfer
           </button>
         </div>
-      </div>
-
-      {/* Estimated Balance Section */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Estimated Balance
-        </h2>
-        <p className="text-2xl font-bold text-gray-800">
-          0.04863102 <span className="text-blue-500">USDT</span>
-        </p>
-        <p className="text-gray-600">$0.05</p>
-        <p className="text-sm text-gray-500 mt-2">
-          Today’s Pnt. <span className="text-red-500">$0.00 (-3.80%)</span>
-        </p>
       </div>
 
       {/* My Assets Section */}

@@ -10,6 +10,7 @@ import Footer from "./Pages/Footer";
 import SignIn from "./Authentication/SignIn";
 // import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
+import Trade from "./Pages/Trade";
 // import { useState } from "react";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/market" element={<MarketData/>} />
           <Route path="/signIn" element={<SignIn/>} />
           <Route path="/signUp" element={<SignUp/>} />
+          <Route path="/trade" element={<Trade/>} />
 
 {/* 
           <Route path="/signin" element={<SignIn setIsLoggedIn={setIsLoggedIn} />} />
