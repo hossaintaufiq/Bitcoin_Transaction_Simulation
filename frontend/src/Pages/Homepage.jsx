@@ -76,22 +76,22 @@ const TradingDashboard = () => {
         <div className="lg:col-span-2">
           {/* Fund Your Account Section */}
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Fund Your Account and Start Trading
+             Lets Start Trading Simulation with Demo Balance
           </h1>
           <div className="bg-gray-100 p-4 rounded-lg">
             <p className="text-gray-600">Your Estimated Balance ➔</p>
             <p className="text-2xl font-bold text-gray-800">
-              0.05 USD* ~ $0.053/20245
+              1000.0 USD*
             </p>
             <p className="text-sm text-gray-500 mt-2">
               Today’s Pnt. $0.00 (+1.93%)
             </p>
             <div className="mt-4 flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                Live transactions
+                Trade
               </button>
               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-                Dashboard
+                Markets
               </button>
             </div>
           </div>

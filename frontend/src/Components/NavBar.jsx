@@ -28,12 +28,9 @@ const NavBar = () => {
             { path: "/", label: "Home" },
             { path: "/market", label: "Markets" },
             { path: "/trade", label: "Trade" },
-            { path: "/live-transactions", label: "Transactions" },
-            { path: "/wallets", label: "Wallets" },
-            
-            { path: "/profile", label: "Profile" },
             { path: "/signIn", label: "SignIn" },
             { path: "/signUp", label: "SignUp" },
+            { path: "/profile", label: "Profile" },
           ].map(({ path, label }) => (
             <li key={path}>
               <Link to={path} className="hover:text-yellow-500">
@@ -70,13 +67,9 @@ const NavBar = () => {
             { path: "/", label: "Home" },
             { path: "/market", label: "Markets" },
             { path: "/trade", label: "Trade" },
-            { path: "/live-transactions", label: "Transactions" },
-            { path: "/wallets", label: "Wallets" },
-            
-            // { path: "/send", label: "Send Bitcoin" },
-            { path: "/profile", label: "Profile" },
             { path: "/signIn", label: "SignIn" },
             { path: "/signUp", label: "SignUp" },
+            { path: "/profile", label: "Profile" },
           ].map(({ path, label }) => (
             <li key={path}>
               <Link

@@ -3,8 +3,6 @@ import "./App.css";
 import Homepage from "./Pages/Homepage";
 import DashBoard from "./Pages/DashBoard";
 import NavBar from "./Components/NavBar";
-import LiveTransaction from "./Pages/LiveTransaction";
-import Wallets from "./Pages/Wallets";
 import MarketData from "./Pages/MarketData";
 import Footer from "./Pages/Footer";
 import SignIn from "./Authentication/SignIn";
@@ -24,8 +22,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<DashBoard/>} /> 
-          <Route path="/live-transactions" element={<LiveTransaction/>} />
-           <Route path="/wallets" element={<Wallets/>} /> 
           <Route path="/market" element={<MarketData/>} />
           <Route path="/signIn" element={<SignIn/>} />
           <Route path="/signUp" element={<SignUp/>} />
