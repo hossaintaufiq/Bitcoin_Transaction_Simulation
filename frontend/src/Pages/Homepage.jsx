@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FAQSection from "../Components/FAQSection";
+import { Link } from "react-router-dom";
 
 const TradingDashboard = () => {
   const [popularCoins, setPopularCoins] = useState([]);
@@ -88,10 +89,11 @@ const TradingDashboard = () => {
             </p>
             <div className="mt-4 flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                Trade
+               <Link to={"/trade"}>Trade</Link> 
               </button>
               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-                Markets
+              <Link to={"/market"}>Markets</Link> 
+                
               </button>
             </div>
           </div>
