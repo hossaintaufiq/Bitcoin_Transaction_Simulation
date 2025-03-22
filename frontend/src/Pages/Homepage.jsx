@@ -1,5 +1,173 @@
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import FAQSection from "../Components/FAQSection";
+// import { Link } from "react-router-dom";
+
+// const TradingDashboard = () => {
+//   const [popularCoins, setPopularCoins] = useState([]);
+//   const [news, setNews] = useState([]);
+
+//   // Fetch popular coins data from CoinGecko API
+//   useEffect(() => {
+//     const fetchPopularCoins = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://api.coingecko.com/api/v3/coins/markets",
+//           {
+//             params: {
+//               vs_currency: "usd",
+//               ids: "bitcoin,ethereum,bnb,ripple,solana",
+//               order: "market_cap_desc",
+//               per_page: 5,
+//               page: 1,
+//               sparkline: false,
+//             },
+//           }
+//         );
+
+//         const coinsData = response.data.map((coin) => ({
+//           name: coin.name,
+//           symbol: coin.symbol.toUpperCase(),
+//           price: `$${coin.current_price.toLocaleString()}`,
+//           change: coin.price_change_percentage_24h.toFixed(2) + "%",
+//         }));
+
+//         setPopularCoins(coinsData);
+//       } catch (error) {
+//         console.error("Error fetching popular coins data:", error);
+//       }
+//     };
+
+//     fetchPopularCoins();
+//   }, []);
+
+//   // Fetch cryptocurrency news from CryptoCompare API
+//   useEffect(() => {
+//     const fetchNews = async () => {
+//       try {
+//         const response = await axios.get(
+//           "https://min-api.cryptocompare.com/data/v2/news/", // CryptoCompare News API
+//           {
+//             params: {
+//               lang: "EN", // Language: English
+//             },
+//           }
+//         );
+
+//         const newsData = response.data.Data.slice(0, 4).map((article) => ({
+//           title: article.title,
+//           source: article.source_info.name,
+//         }));
+
+//         setNews(newsData);
+//       } catch (error) {
+//         console.error("Error fetching news data:", error);
+//       }
+//     };
+
+//     fetchNews();
+//   }, []);
+
+//   return (
+//     <div className="bg-white p-6 rounded-lg shadow-md">
+//       {/* Main Content Grid */}
+//       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+//         {/* Left Side: Fund Your Account and News Section */}
+//         <div className="lg:col-span-2">
+//           {/* Fund Your Account Section */}
+//           <h1 className="text-2xl font-bold text-gray-800 mb-4">
+//              Lets Start Trading Simulation with Demo Balance
+//           </h1>
+//           <div className="bg-gray-100 p-4 rounded-lg">
+//             <p className="text-gray-600">Your Estimated Balance ➔</p>
+//             <p className="text-2xl font-bold text-gray-800">
+//               1000.0 USD*
+//             </p>
+//             <p className="text-sm text-gray-500 mt-2">
+//               Today’s Pnt. $0.00 (+1.93%)
+//             </p>
+//             <div className="mt-4 flex space-x-4">
+//               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+//                <Link to={"/trade"}>Trade</Link> 
+//               </button>
+//               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+//               <Link to={"/market"}>Markets</Link> 
+                
+//               </button>
+//             </div>
+//           </div>
+
+//           {/* News Section */}
+//           <div className="mt-8">
+//             <h2 className="text-xl font-bold text-gray-800 mb-4">News</h2>
+//             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+//               {news.map((article, index) => (
+//                 <div key={index} className="bg-gray-100 p-4 rounded-lg">
+//                   <p className="text-lg font-bold text-gray-800">
+//                     {article.title}
+//                   </p>
+//                   <p className="text-sm text-gray-500">{article.source}</p>
+//                 </div>
+//               ))}
+//             </div>
+//             <button className="mt-4 text-blue-500 hover:text-blue-600 transition">
+//               View All News &gt;
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Right Side: Popular Coins Section */}
+//         <div className="lg:col-span-1">
+//           <h2 className="text-xl font-bold text-gray-800 mb-4">Popular</h2>
+//           <div className="space-y-4">
+//             {popularCoins.map((coin, index) => (
+//               <div key={index} className="bg-gray-100 p-4 rounded-lg">
+//                 <div className="flex justify-between items-center">
+//                   <div>
+//                     <p className="text-lg font-bold text-gray-800">
+//                       {coin.name}
+//                     </p>
+//                     <p className="text-sm text-gray-500">{coin.symbol}</p>
+//                   </div>
+//                   <div className="text-right">
+//                     <p className="text-lg font-bold text-gray-800">
+//                       {coin.price}
+//                     </p>
+//                     <p
+//                       className={`text-sm ${
+//                         coin.change.startsWith("-")
+//                           ? "text-red-500"
+//                           : "text-green-500"
+//                       }`}
+//                     >
+//                       {coin.change}
+//                     </p>
+//                   </div>
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//           <button className="mt-4 text-blue-500 hover:text-blue-600 transition">
+//             View All SDI+ Coins &gt;
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* FAQ Section Added Below */}
+//       <FAQSection />
+//     </div>
+//   );
+// };
+
+// export default TradingDashboard;
+
+
+
+
+//  new code :
+
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import FAQSection from "../Components/FAQSection";
 import { Link } from "react-router-dom";
@@ -7,6 +175,44 @@ import { Link } from "react-router-dom";
 const TradingDashboard = () => {
   const [popularCoins, setPopularCoins] = useState([]);
   const [news, setNews] = useState([]);
+
+  // Guide animation state
+  const [guideStep, setGuideStep] = useState(0);
+  const [isGuideVisible, setIsGuideVisible] = useState(true);
+
+  // Refs for the sections to highlight
+  const fundAccountRef = useRef(null);
+  const newsRef = useRef(null);
+  const popularCoinsRef = useRef(null);
+
+  // Guide steps configuration
+  const guideSteps = [
+    {
+      message: "Welcome! Let's get started.",
+      ref: null, // No highlight for the first step
+    },
+    {
+      message: "This is your demo balance. You can start trading with it.",
+      ref: fundAccountRef,
+    },
+    {
+      message: "Stay updated with the latest cryptocurrency news.",
+      ref: newsRef,
+    },
+    {
+      message: "Check out the most popular coins and their prices.",
+      ref: popularCoinsRef,
+    },
+  ];
+
+  // Handle "Next" button click
+  const handleNextStep = () => {
+    if (guideStep < guideSteps.length - 1) {
+      setGuideStep(guideStep + 1);
+    } else {
+      setIsGuideVisible(false); // End the guide
+    }
+  };
 
   // Fetch popular coins data from CoinGecko API
   useEffect(() => {
@@ -47,10 +253,10 @@ const TradingDashboard = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get(
-          "https://min-api.cryptocompare.com/data/v2/news/", // CryptoCompare News API
+          "https://min-api.cryptocompare.com/data/v2/news/",
           {
             params: {
-              lang: "EN", // Language: English
+              lang: "EN",
             },
           }
         );
@@ -71,35 +277,70 @@ const TradingDashboard = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
+    
+      {/* Guide Overlay */}
+      {isGuideVisible && (
+        <div
+          id="guide-overlay"
+          className="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center transition-opacity duration-500"
+        >
+          {/* Highlight Box */}
+          {guideSteps[guideStep].ref && (
+            <div
+              className="absolute border-2 border-white rounded-lg shadow-lg transition-all duration-500"
+              style={{
+                width: guideSteps[guideStep].ref.current?.offsetWidth,
+                height: guideSteps[guideStep].ref.current?.offsetHeight,
+                top: guideSteps[guideStep].ref.current?.offsetTop,
+                left: guideSteps[guideStep].ref.current?.offsetLeft,
+              }}
+            ></div>
+          )}
+
+          {/* Guide Message */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-md text-center text-gray-800">
+            {guideSteps[guideStep].message}
+          </div>
+
+          {/* Next Button */}
+          <button
+            id="guide-next"
+            className="absolute bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            onClick={handleNextStep}
+          >
+            {guideStep === guideSteps.length - 1 ? "Finish" : "Next"}
+          </button>
+        </div>
+      )}
+
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Side: Fund Your Account and News Section */}
         <div className="lg:col-span-2">
           {/* Fund Your Account Section */}
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
-             Lets Start Trading Simulation with Demo Balance
-          </h1>
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <p className="text-gray-600">Your Estimated Balance ➔</p>
-            <p className="text-2xl font-bold text-gray-800">
-              1000.0 USD*
-            </p>
-            <p className="text-sm text-gray-500 mt-2">
-              Today’s Pnt. $0.00 (+1.93%)
-            </p>
-            <div className="mt-4 flex space-x-4">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-               <Link to={"/trade"}>Trade</Link> 
-              </button>
-              <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-              <Link to={"/market"}>Markets</Link> 
-                
-              </button>
+          <div ref={fundAccountRef}>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              Lets Start Trading Simulation with Demo Balance
+            </h1>
+            <div className="bg-gray-100 p-4 rounded-lg">
+              <p className="text-gray-600">Your Estimated Balance ➔</p>
+              <p className="text-2xl font-bold text-gray-800">1000.0 USD*</p>
+              <p className="text-sm text-gray-500 mt-2">
+                Today’s Pnt. $0.00 (+1.93%)
+              </p>
+              <div className="mt-4 flex space-x-4">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                  <Link to={"/trade"}>Trade</Link>
+                </button>
+                <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                  <Link to={"/market"}>Markets</Link>
+                </button>
+              </div>
             </div>
           </div>
 
           {/* News Section */}
-          <div className="mt-8">
+          <div ref={newsRef} className="mt-8">
             <h2 className="text-xl font-bold text-gray-800 mb-4">News</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               {news.map((article, index) => (
@@ -118,7 +359,7 @@ const TradingDashboard = () => {
         </div>
 
         {/* Right Side: Popular Coins Section */}
-        <div className="lg:col-span-1">
+        <div ref={popularCoinsRef} className="lg:col-span-1">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Popular</h2>
           <div className="space-y-4">
             {popularCoins.map((coin, index) => (
