@@ -1,5 +1,6 @@
-// import React from "react";
 
+// import React from "react";
+//1st code 
 const LiveTransaction = () => {
   // Sample transaction data
   const transactions = [
