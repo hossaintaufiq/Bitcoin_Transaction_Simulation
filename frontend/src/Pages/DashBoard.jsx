@@ -1,10 +1,12 @@
 
-import { FaChartLine, FaWallet, FaUsers, FaCog, FaBars } from "react-icons/fa";
-import { useState } from "react";
+
+import { FaChartLine, FaWallet, FaUsers, FaCog,  FaPowerOff } from "react-icons/fa";
+import { useState, useContext } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import { AuthContext } from "../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 import Wallets from "./Wallets";
 import LiveTransaction from "./LiveTransaction";
-// import TradeInterface from from "./Trade";
 
 const weeklyTransactions = [
   { day: "Mon", transactions: 50 },
@@ -35,11 +37,25 @@ const DashBoard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Analytics");
 
+  // new code
+  const { logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        navigate("/signIn");
+      })
+      .catch(error => console.error(error));
+  };
+
+
+  // end new code
   return (
     <div className="flex min-h-screen bg-gray-100">
       
       {/* Sidebar */}
-      <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
+      {/* <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
         <div className="p-6">
           <h1 className="text-2xl font-bold">Dashboard</h1>
         </div>
@@ -60,10 +76,10 @@ const DashBoard = () => {
             </button>
           ))}
         </nav>
-      </div>
+      </div> */}
 
       {/* Mobile Sidebar */}
-      <div className="md:hidden fixed top-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center z-50">
+      {/* <div className="md:hidden fixed top-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center z-50">
         <h1 className="text-xl font-bold">Analytics</h1>
         <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
           <FaBars size={24} />
@@ -80,6 +96,55 @@ const DashBoard = () => {
                   setIsSidebarOpen(false);
                 }}
                 className="block w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            ))}
+          </nav>
+        </div>
+      )} */}
+
+       {/* Desktop Sidebar */}
+       <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
+        <div className="p-6">
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+        </div>
+        <nav className="mt-6">
+          {["Analytics", "wallets", "transactions", "settings", "logout"].map((section) => (
+            <button
+              key={section}
+              onClick={() => section === "logout" ? handleLogout() : setActiveSection(section)}
+              className={`flex items-center w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white ${
+                activeSection === section ? "bg-gray-700 text-white" : ""
+              } ${section === "logout" ? "hover:text-red-400" : ""}`}
+            >
+              {section === "Analytics" && <FaChartLine className="mr-3" />}
+              {section === "wallets" && <FaWallet className="mr-3" />}
+              {section === "transactions" && <FaUsers className="mr-3" />}
+              {section === "settings" && <FaCog className="mr-3" />}
+              {section === "logout" && <FaPowerOff className="mr-3" />}
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Mobile Sidebar */}
+      {isSidebarOpen && (
+        <div className="md:hidden fixed inset-0 bg-gray-800 text-white w-3/4 p-6 z-40">
+          <nav className="mt-6">
+            {["Analytics", "wallets", "transactions", "settings", "logout"].map((section) => (
+              <button
+                key={section}
+                onClick={() => {
+                  if (section === "logout") {
+                    handleLogout();
+                  } else {
+                    setActiveSection(section);
+                  }
+                  setIsSidebarOpen(false);
+                }}
+                className="block w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white text-left"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
