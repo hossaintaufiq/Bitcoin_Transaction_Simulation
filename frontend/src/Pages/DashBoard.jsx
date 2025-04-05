@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 import Wallets from "./Wallets";
 import LiveTransaction from "./LiveTransaction";
+// import TradeInterface from from "./Trade";
 
 const weeklyTransactions = [
   { day: "Mon", transactions: 50 },
@@ -36,6 +37,7 @@ const DashBoard = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
+      
       {/* Sidebar */}
       <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
         <div className="p-6">

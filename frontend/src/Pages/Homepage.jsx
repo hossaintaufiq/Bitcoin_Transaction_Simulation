@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FAQSection from "../Components/FAQSection";
@@ -77,23 +76,20 @@ const TradingDashboard = () => {
         <div className="lg:col-span-2">
           {/* Fund Your Account Section */}
           <h1 className="text-2xl font-bold text-gray-800 mb-4">
-             Lets Start Trading Simulation with Demo Balance
+            Lets Start Trading Simulation with Demo Balance
           </h1>
           <div className="bg-gray-100 p-4 rounded-lg">
             <p className="text-gray-600">Your Estimated Balance ➔</p>
-            <p className="text-2xl font-bold text-gray-800">
-              1000.0 USD*
-            </p>
+            <p className="text-2xl font-bold text-gray-800">1000.0 USD*</p>
             <p className="text-sm text-gray-500 mt-2">
               Today’s Pnt. $0.00 (+1.93%)
             </p>
             <div className="mt-4 flex space-x-4">
               <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-               <Link to={"/trade"}>Trade</Link> 
+                <Link to={"/trade"}>Trade</Link>
               </button>
               <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
-              <Link to={"/market"}>Markets</Link> 
-                
+                <Link to={"/market"}>Markets</Link>
               </button>
             </div>
           </div>
@@ -119,7 +115,7 @@ const TradingDashboard = () => {
 
         {/* Right Side: Popular Coins Section */}
         <div className="lg:col-span-1">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Popular</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">Popular Coins</h2>
           <div className="space-y-4">
             {popularCoins.map((coin, index) => (
               <div key={index} className="bg-gray-100 p-4 rounded-lg">
@@ -154,14 +150,113 @@ const TradingDashboard = () => {
         </div>
       </div>
 
-      {/* FAQ Section Added Below */}
+      {/* YouTube Videos Section */}
+      {/* YouTube Videos Section */}
+<div className="mt-12">
+  <h2 className="text-2xl font-bold text-gray-800 mb-6">Bitcoin Educational Content</h2>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* First Row */}
+    <div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/Gc2en3nHxA4"
+        title="Bitcoin Explained"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">How Bitcoin Works in 5 Minutes</h3>
+        <p className="text-sm text-gray-600">TechQuickie</p>
+        <p className="text-xs text-gray-500 mt-2">2.1M views · 1 year ago</p>
+      </div>
+    </div>
+
+    <div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/bBC-nXj3Ng4"
+        title="Bitcoin Basics"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">Bitcoin Basics Explained</h3>
+        <p className="text-sm text-gray-600">Andrei Jikh</p>
+        <p className="text-xs text-gray-500 mt-2">985K views · 6 months ago</p>
+      </div>
+    </div>
+
+    <div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/s4g1XFU8Gto"
+        title="Bitcoin Investment"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">Why Bitcoin Matters</h3>
+        <p className="text-sm text-gray-600">Coin Bureau</p>
+        <p className="text-xs text-gray-500 mt-2">1.5M views · 8 months ago</p>
+      </div>
+    </div>
+{/* Second Row - NEW WORKING VIDEOS */}
+<div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/l9jOJk30eQs"
+        title="Bitcoin Technical Explanation"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">Bitcoin Technical Deep Dive</h3>
+        <p className="text-sm text-gray-600">Bitcoin Magazine</p>
+        <p className="text-xs text-gray-500 mt-2">380K views · 2 years ago</p>
+      </div>
+    </div>
+
+    {/* Fixed Video 2 */}
+    <div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/bBC-nXj3Ng4"
+        title="Bitcoin Technicals"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">How Bitcoin Works Technically</h3>
+        <p className="text-sm text-gray-600">3Blue1Brown</p>
+        <p className="text-xs text-gray-500 mt-2">4.2M views · 2 years ago</p>
+      </div>
+    </div>
+
+    {/* Fixed Video 3 */}
+    <div className="bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <iframe
+        className="w-full aspect-video"
+        src="https://www.youtube.com/embed/Y-w7SnQWwVA"
+        title="Bitcoin Basics"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <div className="p-4">
+        <h3 className="font-bold text-gray-800 mb-2">What is Bitcoin?</h3>
+        <p className="text-sm text-gray-600">TED-Ed</p>
+        <p className="text-xs text-gray-500 mt-2">2.8M views · 3 years ago</p>
+      </div>
+    </div>
+  </div>
+  <button className="mt-6 text-blue-500 hover:text-blue-600 transition">
+    View All Videos &gt;
+  </button>
+</div>
+
+      {/* Keep your existing FAQSection below */}
       <FAQSection />
     </div>
   );
 };
 
 export default TradingDashboard;
-
-
-
-

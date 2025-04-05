@@ -1,14 +1,16 @@
 
 export default login
-import { useState } from 'react'
+// import { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { doSignInWithEmailAndPassword, doSignInWithGoogle } from '../../../firebase/auth'
 import { useAuth } from '../../../contexts/authContext'
+import { useState } from 'react'; 
 
 const login = () => {
     const { userLoggedIn } = useAuth
 
-    const [email, setEmail] = useState('')
+    // const [email, setEmail] = useState('')
+    const [email, setEmail]=useState('')
     const [password, setPassword] = useState('')
     const [isSigningIn, setIsSigningIn] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')

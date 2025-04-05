@@ -109,7 +109,7 @@ const Wallets = () => {
         </div>
       </div>
 
-      {/* Transactions Table */}
+      {/* Transactions Table
       <div className="bg-white rounded-lg shadow-md overflow-hidden mt-8">
         <h2 className="text-xl font-semibold text-gray-700 p-6">
           Transactions
@@ -185,7 +185,7 @@ const Wallets = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };
