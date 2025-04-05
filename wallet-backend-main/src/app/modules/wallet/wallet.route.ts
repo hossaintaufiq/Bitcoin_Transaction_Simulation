@@ -1,6 +1,6 @@
 // import express from 'express'
-// import validateRequest from '../../middlewares/validateRequest'
-// import { WalletValidation } from './wallet.validation'
+// // import validateRequest from '../../middlewares/validateRequest'
+// // import { WalletValidation } from './wallet.validation'
 // import { WalletController } from './wallet.controller'
 
 // const router = express.Router()
@@ -13,7 +13,7 @@
 // router.get('/', WalletController.getAllWallet)
 
 // export const WalletRoute = router
-// 
+// // 
 import express from 'express'
 import validateRequest from '../../middlewares/validateRequest'
 import { WalletValidation } from './wallet.validation'
