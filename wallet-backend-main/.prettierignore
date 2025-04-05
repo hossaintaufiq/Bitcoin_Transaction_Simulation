@@ -1,0 +1,40 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build and distribution directories
+dist/
+build/
+
+# Ignore environment files
+.env
+.env.* 
+
+# Ignore lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore configuration files
+tsconfig*.json
+jest.config.js
+*.config.js
+
+# Ignore specific file types
+*.min.js
+*.log
+
+# Ignore coverage reports
+coverage/
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+
+# Ignore compiled files
+*.d.ts
+
+# Ignore VSCode settings and other IDE-specific files
+.vscode/
+.idea/
