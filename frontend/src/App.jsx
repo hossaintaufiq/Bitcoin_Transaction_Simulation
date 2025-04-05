@@ -5,10 +5,10 @@ import DashBoard from "./Pages/DashBoard";
 import NavBar from "./Components/NavBar";
 import MarketData from "./Pages/MarketData";
 import Footer from "./Pages/Footer";
-import SignIn from "./Authentication/SignIn";
-// import SignIn from "./Authentication/SignIn";
-import SignUp from "./Authentication/SignUp";
 import Trade from "./Pages/Trade";
+// import login from "./Authentication/login";
+// import registration from "./Authentication/registration";
+
 // import { useState } from "react";
 
 function App() {
@@ -23,8 +23,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/profile" element={<DashBoard/>} /> 
           <Route path="/market" element={<MarketData/>} />
-          <Route path="/signIn" element={<SignIn/>} />
-          <Route path="/signUp" element={<SignUp/>} />
+          {/* <Route path="/login" element={<login/>} /> */}
+          {/* <Route path="/registration" element={<registration/>} /> */}
+          <Route path= "registration" element={<registration/>} />
           <Route path="/trade" element={<Trade/>} />
 
 {/* 
