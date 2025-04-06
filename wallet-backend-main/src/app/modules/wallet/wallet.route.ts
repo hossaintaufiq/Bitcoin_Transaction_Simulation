@@ -14,24 +14,37 @@
 
 // export const WalletRoute = router
 // // 
-import express from 'express'
-import validateRequest from '../../middlewares/validateRequest'
-import { WalletValidation } from './wallet.validation'
-import { WalletController } from './wallet.controller'
+import express from 'express';
+import validateRequest from '../../middlewares/validateRequest';
+import { WalletValidation } from './wallet.validation';
+import { WalletController } from './wallet.controller';
 
-const router = express.Router()
+const router = express.Router();
 
-// POST: Create new user wallet with assets (and optional transactions)
+// Enhanced trade validation and logging
 router.post(
   '/',
-  validateRequest(WalletValidation.userWalletSchema), // ✅ Corrected casing here
-  WalletController.createWallet
-)
+  (req, res, next) => {
+    console.log('\n💡 Incoming POST /api/wallet');
+    console.log('📦 Headers:', req.headers);
+    console.log('📤 Request Body:', req.body);
+    console.log('🕒 Timestamp:', new Date().toISOString());
+    next();
+  },
+  validateRequest(WalletValidation.tradeValidationSchema),
+  WalletController.processTrade
+);
 
-// GET: Fetch all wallets
+// Enhanced GET endpoint with query validation
 router.get(
   '/',
-  WalletController.getAllWallet
-)
+  (req, res, next) => {
+    console.log('\n💡 Incoming GET /api/wallet');
+    console.log('🔍 Query Parameters:', req.query);
+    next();
+  },
+  validateRequest(WalletValidation.getTradesSchema),
+  WalletController.getTradeHistory
+);
 
-export const WalletRoute = router
+export const WalletRoute = router;
