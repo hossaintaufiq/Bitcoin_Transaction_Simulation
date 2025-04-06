@@ -1,7 +1,5 @@
 
-
 const LiveTransaction = () => {
-  // Sample transaction data
   const transactions = [
     {
       id: "TX123458",
@@ -30,75 +28,77 @@ const LiveTransaction = () => {
   ];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Transactions</h1>
+    <div className="p-6 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 min-h-screen">
+      <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300 mb-8">
+        Transactions
+      </h1>
 
       {/* Search and Filters */}
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <input
           type="text"
           placeholder="Search by Transaction ID"
-          className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow"
+          className="px-4 py-3 bg-gray-800/40 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200 placeholder-gray-400 flex-grow backdrop-blur-lg"
         />
-        <select className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <select className="px-4 py-3 bg-gray-800/40 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-200 backdrop-blur-lg">
           <option value="">All Statuses</option>
           <option value="Completed">Completed</option>
           <option value="Pending">Pending</option>
           <option value="Failed">Failed</option>
         </select>
-        <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+        <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all">
           Filter
         </button>
       </div>
 
       {/* Transactions Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-gray-800/40 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden border border-gray-700">
         <table className="min-w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-800">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 Transaction ID
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 Amount (BTC)
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 Timestamp
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 From
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-sm font-medium text-gray-300 uppercase tracking-wider">
                 To
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-700">
             {transactions.map((tx) => (
-              <tr key={tx.id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 text-sm text-gray-900">{tx.id}</td>
-                <td className="px-6 py-4 text-sm text-gray-900">{tx.amount}</td>
+              <tr key={tx.id} className="hover:bg-gray-800/30 transition-colors">
+                <td className="px-6 py-4 text-sm text-gray-100 font-mono">{tx.id}</td>
+                <td className="px-6 py-4 text-sm text-gray-100">{tx.amount}</td>
                 <td className="px-6 py-4 text-sm">
                   <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                    className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       tx.status === "Completed"
-                        ? "bg-green-100 text-green-800"
+                        ? "bg-green-900/30 text-green-400"
                         : tx.status === "Pending"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-red-100 text-red-800"
+                        ? "bg-yellow-900/30 text-yellow-400"
+                        : "bg-red-900/30 text-red-400"
                     }`}
                   >
                     {tx.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-900">{tx.timestamp}</td>
-                <td className="px-6 py-4 text-sm text-gray-900 truncate max-w-[150px]">
+                <td className="px-6 py-4 text-sm text-gray-400">{tx.timestamp}</td>
+                <td className="px-6 py-4 text-sm text-gray-400 font-mono truncate max-w-[150px] hover:text-gray-200 transition-colors">
                   {tx.from}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-900 truncate max-w-[150px]">
+                <td className="px-6 py-4 text-sm text-gray-400 font-mono truncate max-w-[150px] hover:text-gray-200 transition-colors">
                   {tx.to}
                 </td>
               </tr>
@@ -111,4 +111,3 @@ const LiveTransaction = () => {
 };
 
 export default LiveTransaction;
-

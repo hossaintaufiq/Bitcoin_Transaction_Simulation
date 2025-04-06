@@ -1,163 +1,83 @@
 
+
 import { useContext } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
-// const SignIn = () => {
-    // const {passwordLogin, googleLogin} = useContext(AuthContext);
-    // const {
-    //     register,
-    //     handleSubmit,
-    //     formState: { errors },
-    // } = useForm()
-    // const location = useLocation();
-    // const navigate = useNavigate();
-
-    // const onSubmit = (data) => {
-    //     //sign in with email and password
-    //     passwordLogin(data.email, data.password)
-    //     .then(result => {
-    //         console.log(result.user);
-    //         // navigte to state or home
-    //         navigate(location?.state ? location.state : '/');
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     })
-        
-    // }
-    // const handleGoogleLogin = () => {
-    //     // console.log('google login works')
-    //     googleLogin()
-    //     .then(result => {
-    //         console.log(result.user);
-    //         // navigte to state or home
-    //         navigate(location?.state ? location.state : '/');
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     })
-    // }
-    
-//     return (
-//         <div className="hero bg-base-200 min-h-screen">
-//             <div className="hero-content flex-col ">
-//                 <div className="text-center lg:text-left">
-//                     <h1 className="text-5xl font-bold">Login now!</h1>
-
-//                 </div>
-//                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-//                     <form onSubmit={handleSubmit(onSubmit)}>
-//                         <div className="card-body">
-//                             <fieldset className="fieldset">
-                               
-
-//                                 <label className="fieldset-label">Email</label>
-//                                 <input type="email" className="input" placeholder="Email" {...register("email", { required: true })} />
-//                                 {/* errors will return when field validation fails  */}
-//                                 {errors.email && <span className='text-red-600'>This field is required</span>}
-//                                 <label className="fieldset-label">Password</label>
-//                                 <input type="password" className="input" placeholder="Password" {...register("password", { required: true })} />
-//                                 {/* errors will return when field validation fails  */}
-//                                 {errors.password && <span className='text-red-600'>This field is required</span>}
-//                                 <div><a className="link link-hover">Forgot password?</a></div>
-//                                 <button className="btn btn-neutral mt-4">Login</button>
-//                             </fieldset>
-//                         </div>
-//                     </form>
-//                     <p className="text-center pb-2">Sign In With <span onClick={handleGoogleLogin} className="text-blue-600 font-bold cursor-pointer">Google</span></p>
-                    
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default SignIn;
-
-
-// new code 
 const SignIn = () => {
-    // ... existing logic remains unchanged
-    const {passwordLogin, googleLogin} = useContext(AuthContext);
+    const { passwordLogin, googleLogin } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm()
+    } = useForm();
     const location = useLocation();
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        //sign in with email and password
         passwordLogin(data.email, data.password)
-        .then(result => {
-            console.log(result.user);
-            // navigte to state or home
-            navigate(location?.state ? location.state : '/');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-        
-    }
+            .then(() => {
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     const handleGoogleLogin = () => {
-        // console.log('google login works')
         googleLogin()
-        .then(result => {
-            console.log(result.user);
-            // navigte to state or home
-            navigate(location?.state ? location.state : '/');
-        })
-        .catch(error => {
-            console.error(error);
-        })
-    }
-    
+            .then(() => {
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-xl">
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center justify-center p-4">
+            <div className="w-full max-w-md bg-gray-800/40 backdrop-blur-lg rounded-2xl shadow-xl border border-gray-700">
                 <div className="p-8 space-y-6">
                     <div className="text-center space-y-2">
-                        <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
-                        <p className="text-gray-500">Sign in to continue to your account</p>
+                        <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300">
+                            Welcome Back
+                        </h1>
+                        <p className="text-gray-400">Sign in to continue to your account</p>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
                             <input
                                 type="email"
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg bg-gray-700/30 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                                 placeholder="Enter your email"
                                 {...register("email", { required: true })}
                             />
-                            {errors.email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
+                            {errors.email && <p className="text-red-400 text-sm mt-1">Email is required</p>}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <label className="block text-sm font-medium text-gray-300 mb-1">Password</label>
                             <input
                                 type="password"
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                                className="w-full px-4 py-3 rounded-lg bg-gray-700/30 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
                                 placeholder="Enter your password"
                                 {...register("password", { required: true })}
                             />
-                            {errors.password && <p className="text-red-500 text-sm mt-1">Password is required</p>}
+                            {errors.password && <p className="text-red-400 text-sm mt-1">Password is required</p>}
                         </div>
 
                         <div className="flex items-center justify-between">
-                            <a href="#" className="text-sm text-blue-600 hover:text-blue-800">
+                            <a href="#" className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
                                 Forgot password?
                             </a>
                         </div>
 
                         <button
                             type="submit"
-                            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-semibold"
+                            className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all font-semibold shadow-lg"
                         >
                             Sign In
                         </button>
@@ -165,16 +85,16 @@ const SignIn = () => {
 
                     <div className="relative">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-gray-200"></div>
+                            <div className="w-full border-t border-gray-700"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                            <span className="px-2 bg-gray-800/40 text-gray-400">Or continue with</span>
                         </div>
                     </div>
 
                     <button
                         onClick={handleGoogleLogin}
-                        className="w-full flex items-center justify-center gap-2 py-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="w-full flex items-center justify-center gap-2 py-3 border border-gray-600 rounded-lg hover:bg-gray-700/30 transition-colors text-white"
                     >
                         <svg
                             className="w-5 h-5"
@@ -199,12 +119,12 @@ const SignIn = () => {
                                 fill="#EA4335"
                             />
                         </svg>
-                        <span className="font-medium text-gray-700">Continue with Google</span>
+                        <span className="font-medium">Continue with Google</span>
                     </button>
 
-                    <p className="text-center text-sm text-gray-600">
-                        Dont have an account?{" "}
-                        <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
+                    <p className="text-center text-sm text-gray-400">
+                        Do not have an account?{" "}
+                        <a href="/signup" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
                             Sign up
                         </a>
                     </p>

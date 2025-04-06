@@ -1,5 +1,4 @@
 
-
 import { FaChartLine, FaWallet, FaUsers, FaCog,  FaPowerOff } from "react-icons/fa";
 import { useState, useContext } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
@@ -37,76 +36,20 @@ const DashBoard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("Analytics");
 
-  // new code
   const { logOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logOut()
-      .then(() => {
-        navigate("/signIn");
-      })
+      .then(() => navigate("/signIn"))
       .catch(error => console.error(error));
   };
 
-
-  // end new code
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      
-      {/* Sidebar */}
-      {/* <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
-        <div className="p-6">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-        </div>
-        <nav className="mt-6">
-          {["Analytics", "wallets", "transactions", "settings"].map((section) => (
-            <button
-              key={section}
-              onClick={() => setActiveSection(section)}
-              className={`flex items-center w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white ${
-                activeSection === section ? "bg-gray-700 text-white" : ""
-              }`}
-            >
-              {section === "Analytics" && <FaChartLine className="mr-3" />}
-              {section === "wallets" && <FaWallet className="mr-3" />}
-              {section === "transactions" && <FaUsers className="mr-3" />}
-              {section === "settings" && <FaCog className="mr-3" />}
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </button>
-          ))}
-        </nav>
-      </div> */}
-
-      {/* Mobile Sidebar */}
-      {/* <div className="md:hidden fixed top-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center z-50">
-        <h1 className="text-xl font-bold">Analytics</h1>
-        <button onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-          <FaBars size={24} />
-        </button>
-      </div>
-      {isSidebarOpen && (
-        <div className="md:hidden fixed inset-0 bg-gray-800 text-white w-3/4 p-6 z-40">
-          <nav className="mt-6">
-            {["Analytics", "wallets", "transactions", "settings"].map((section) => (
-              <button
-                key={section}
-                onClick={() => {
-                  setActiveSection(section);
-                  setIsSidebarOpen(false);
-                }}
-                className="block w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white"
-              >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
-            ))}
-          </nav>
-        </div>
-      )} */}
-
-       {/* Desktop Sidebar */}
-       <div className="bg-gray-800 text-white w-64 flex-shrink-0 hidden md:block">
-        <div className="p-6">
+    <div className="flex min-h-screen bg-[#0f172a] text-white">
+      {/* Desktop Sidebar */}
+      <div className="bg-[#1e293b] w-64 flex-shrink-0 hidden md:block">
+        <div className="p-6 border-b border-[#334155]">
           <h1 className="text-2xl font-bold">Dashboard</h1>
         </div>
         <nav className="mt-6">
@@ -114,8 +57,8 @@ const DashBoard = () => {
             <button
               key={section}
               onClick={() => section === "logout" ? handleLogout() : setActiveSection(section)}
-              className={`flex items-center w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white ${
-                activeSection === section ? "bg-gray-700 text-white" : ""
+              className={`flex items-center w-full px-6 py-2 hover:bg-[#334155] hover:text-white ${
+                activeSection === section ? "bg-[#334155] text-white" : "text-gray-300"
               } ${section === "logout" ? "hover:text-red-400" : ""}`}
             >
               {section === "Analytics" && <FaChartLine className="mr-3" />}
@@ -131,7 +74,7 @@ const DashBoard = () => {
 
       {/* Mobile Sidebar */}
       {isSidebarOpen && (
-        <div className="md:hidden fixed inset-0 bg-gray-800 text-white w-3/4 p-6 z-40">
+        <div className="md:hidden fixed inset-0 bg-[#1e293b] w-3/4 p-6 z-40">
           <nav className="mt-6">
             {["Analytics", "wallets", "transactions", "settings", "logout"].map((section) => (
               <button
@@ -144,7 +87,7 @@ const DashBoard = () => {
                   }
                   setIsSidebarOpen(false);
                 }}
-                className="block w-full px-6 py-2 text-gray-300 hover:bg-gray-700 hover:text-white text-left"
+                className="block w-full px-6 py-2 text-gray-300 hover:bg-[#334155] text-left"
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
@@ -155,7 +98,7 @@ const DashBoard = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden mt-12 md:mt-0">
-        <header className="bg-white shadow-md p-4">
+        <header className="bg-[#1e293b] shadow-md p-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold">Welcome, Taufiq</h2>
           </div>
@@ -164,44 +107,41 @@ const DashBoard = () => {
         <main className="flex-1 p-6 overflow-y-auto">
           {activeSection === "Analytics" ? (
             <>
-              {/* Dashboard Overview */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-700">Total Revenue</h3>
-                  <p className="text-3xl font-bold text-blue-600 mt-2">$12,345</p>
+                <div className="bg-[#1e293b] p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold">Total Revenue</h3>
+                  <p className="text-3xl font-bold text-blue-400 mt-2">$12,345</p>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-700">Balance</h3>
-                  <p className="text-3xl font-bold text-green-600 mt-2">$1,234</p>
+                <div className="bg-[#1e293b] p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold">Balance</h3>
+                  <p className="text-3xl font-bold text-green-400 mt-2">$1,234</p>
                 </div>
-                <div className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-700">Transactions</h3>
-                  <p className="text-3xl font-bold text-purple-600 mt-2">567</p>
+                <div className="bg-[#1e293b] p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold">Transactions</h3>
+                  <p className="text-3xl font-bold text-purple-400 mt-2">567</p>
                 </div>
               </div>
 
-              {/* Weekly Transactions Graph */}
-              <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold text-gray-700 mb-4">Weekly Transactions</h3>
+              <div className="mt-8 bg-[#1e293b] p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-semibold mb-4">Weekly Transactions</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={weeklyTransactions}>
-                    <XAxis dataKey="day" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="transactions" fill="#4F46E5" />
+                    <XAxis dataKey="day" stroke="#94a3b8" />
+                    <YAxis stroke="#94a3b8" />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155' }} labelStyle={{ color: '#94a3b8' }} />
+                    <Bar dataKey="transactions" fill="#60a5fa" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
-              {/* Monthly Revenue Report */}
-              <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold text-gray-700 mb-4">Monthly Revenue Report</h3>
+              <div className="mt-8 bg-[#1e293b] p-6 rounded-lg shadow-md">
+                <h3 className="text-lg font-semibold mb-4">Monthly Revenue Report</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={monthlyReport}>
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="revenue" stroke="#10B981" strokeWidth={3} />
+                    <XAxis dataKey="month" stroke="#94a3b8" />
+                    <YAxis stroke="#94a3b8" />
+                    <Tooltip contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155' }} labelStyle={{ color: '#94a3b8' }} />
+                    <Line type="monotone" dataKey="revenue" stroke="#34d399" strokeWidth={3} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -211,8 +151,8 @@ const DashBoard = () => {
           ) : activeSection === "transactions" ? (
             <LiveTransaction />
           ) : activeSection === "settings" ? (
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-gray-700">Settings</h3>
+            <div className="bg-[#1e293b] p-6 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold">Settings</h3>
               <p>Account settings here</p>
             </div>
           ) : null}

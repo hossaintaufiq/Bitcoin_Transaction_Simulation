@@ -10,7 +10,7 @@ const TradeInterface = () => {
   const [total, setTotal] = useState('');
   const [tradeType, setTradeType] = useState('buy');
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
-  const [demoBalance, setDemoBalance] = useState(1000.00);
+  const [demoBalance, setDemoBalance] = useState(1000.0);
   const [btcHolding, setBtcHolding] = useState(0);
   const [marketPrice, setMarketPrice] = useState(0);
   const [transactionHistory, setTransactionHistory] = useState([]);
@@ -19,10 +19,14 @@ const TradeInterface = () => {
   useEffect(() => {
     const fetchChartData = async () => {
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1');
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1'
+        );
         const data = await response.json();
         const prices = data.prices;
-        const labels = prices.map((price) => new Date(price[0]).toLocaleTimeString());
+        const labels = prices.map((price) =>
+          new Date(price[0]).toLocaleTimeString()
+        );
         const dataset = {
           label: 'BTC Price (USDT)',
           data: prices.map((price) => price[1]),
@@ -71,27 +75,27 @@ const TradeInterface = () => {
         alert('Insufficient balance for this trade');
         return;
       }
-      setDemoBalance(prev => prev - numericTotal);
-      setBtcHolding(prev => prev + numericAmount);
+      setDemoBalance((prev) => prev - numericTotal);
+      setBtcHolding((prev) => prev + numericAmount);
     } else {
       if (numericAmount > btcHolding) {
         alert('Insufficient BTC holdings for this trade');
         return;
       }
-      setDemoBalance(prev => prev + numericTotal);
-      setBtcHolding(prev => prev - numericAmount);
+      setDemoBalance((prev) => prev + numericTotal);
+      setBtcHolding((prev) => prev - numericAmount);
     }
 
     // Record transaction
-    setTransactionHistory(prev => [
+    setTransactionHistory((prev) => [
       ...prev,
       {
         type: tradeType,
         amount: numericAmount,
         price: marketPrice,
         total: numericTotal,
-        timestamp: new Date().toLocaleString()
-      }
+        timestamp: new Date().toLocaleString(),
+      },
     ]);
 
     setAmount('');
@@ -99,27 +103,35 @@ const TradeInterface = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-gray-100 p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">BTC/USDT Trading (Demo)</h1>
+        <h1 className="text-2xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300">
+          BTC/USDT Trading (Demo)
+        </h1>
 
         {/* Balance Dashboard */}
-        <div className="bg-blue-50 p-4 rounded-lg mb-6 shadow-sm">
+        <div className="bg-gray-800/40 p-4 rounded-lg mb-6 shadow-sm border border-gray-700">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <p className="text-sm text-gray-600">Cash Balance</p>
-              <p className="text-xl font-bold text-green-600">${demoBalance.toFixed(2)}</p>
+              <p className="text-sm text-gray-400">Cash Balance</p>
+              <p className="text-xl font-bold text-green-400">
+                ${demoBalance.toFixed(2)}
+              </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">BTC Holdings</p>
-              <p className="text-xl font-bold">{btcHolding.toFixed(6)} BTC</p>
+              <p className="text-sm text-gray-400">BTC Holdings</p>
+              <p className="text-xl font-bold text-blue-400">
+                {btcHolding.toFixed(6)} BTC
+              </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Current Price</p>
-              <p className="text-xl font-bold">${marketPrice.toFixed(2)}</p>
+              <p className="text-sm text-gray-400">Current Price</p>
+              <p className="text-xl font-bold text-blue-400">
+                ${marketPrice.toFixed(2)}
+              </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Portfolio Value</p>
+              <p className="text-sm text-gray-400">Portfolio Value</p>
               <p className="text-xl font-bold">
                 ${(demoBalance + btcHolding * marketPrice).toFixed(2)}
               </p>
@@ -128,8 +140,10 @@ const TradeInterface = () => {
         </div>
 
         {/* Price Chart */}
-        <div className="bg-gray-50 p-4 rounded-lg mb-6">
-          <h2 className="text-xl font-bold mb-4">BTC Price Chart (24h)</h2>
+        <div className="bg-gray-800/40 p-4 rounded-lg mb-6 shadow-sm border border-gray-700">
+          <h2 className="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300">
+            BTC Price Chart (24h)
+          </h2>
           <div className="h-96">
             <Line
               data={chartData}
@@ -137,12 +151,25 @@ const TradeInterface = () => {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                  legend: { position: 'bottom' }
+                  legend: {
+                    position: 'bottom',
+                    labels: { color: '#94a3b8' },
+                  },
                 },
                 scales: {
-                  x: { title: { display: true, text: 'Time' } },
-                  y: { title: { display: true, text: 'Price (USDT)' } }
-                }
+                  x: {
+                    title: { display: true, text: 'Time', color: '#94a3b8' },
+                    ticks: { color: '#94a3b8' },
+                  },
+                  y: {
+                    title: {
+                      display: true,
+                      text: 'Price (USDT)',
+                      color: '#94a3b8',
+                    },
+                    ticks: { color: '#94a3b8' },
+                  },
+                },
               }}
             />
           </div>
@@ -151,16 +178,24 @@ const TradeInterface = () => {
         {/* Trading Interface */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Order Form */}
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+          <div className="bg-gray-800/40 p-6 rounded-lg shadow-sm border border-gray-700">
             <div className="flex gap-4 mb-6">
               <button
-                className={`flex-1 py-2 rounded ${tradeType === 'buy' ? 'bg-green-600 text-white' : 'bg-gray-200'}`}
+                className={`flex-1 py-2 rounded ${
+                  tradeType === 'buy'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-gray-600 text-gray-200'
+                }`}
                 onClick={() => setTradeType('buy')}
               >
                 Buy BTC
               </button>
               <button
-                className={`flex-1 py-2 rounded ${tradeType === 'sell' ? 'bg-red-600 text-white' : 'bg-gray-200'}`}
+                className={`flex-1 py-2 rounded ${
+                  tradeType === 'sell'
+                    ? 'bg-red-600 text-white'
+                    : 'bg-gray-600 text-gray-200'
+                }`}
                 onClick={() => setTradeType('sell')}
               >
                 Sell BTC
@@ -169,12 +204,14 @@ const TradeInterface = () => {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Price (USDT)</label>
+                <label className="block text-sm font-medium mb-1">
+                  Price (USDT)
+                </label>
                 <input
                   type="text"
                   value={marketPrice.toFixed(2)}
                   readOnly
-                  className="w-full p-2 bg-gray-100 rounded border border-gray-300"
+                  className="w-full p-2 bg-gray-700 rounded border border-gray-600 text-gray-100"
                 />
               </div>
               <div>
@@ -185,7 +222,7 @@ const TradeInterface = () => {
                   type="number"
                   value={amount}
                   onChange={handleAmountChange}
-                  className="w-full p-2 rounded border border-gray-300"
+                  className="w-full p-2 rounded border border-gray-600 bg-gray-700 text-gray-100"
                   placeholder="0.00"
                 />
               </div>
@@ -197,14 +234,14 @@ const TradeInterface = () => {
                   type="number"
                   value={total}
                   onChange={handleTotalChange}
-                  className="w-full p-2 rounded border border-gray-300"
+                  className="w-full p-2 rounded border border-gray-600 bg-gray-700 text-gray-100"
                   placeholder="0.00"
                 />
               </div>
               <button
                 onClick={executeTrade}
                 className={`w-full py-3 rounded-lg font-bold ${
-                  tradeType === 'buy' 
+                  tradeType === 'buy'
                     ? 'bg-green-600 hover:bg-green-700 text-white'
                     : 'bg-red-600 hover:bg-red-700 text-white'
                 }`}
@@ -214,28 +251,33 @@ const TradeInterface = () => {
             </div>
           </div>
 
-
-
-
           {/* Transaction History */}
-          <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
-            <h2 className="text-xl font-bold mb-4">Transaction History</h2>
+          <div className="bg-gray-800/40 p-6 rounded-lg shadow-sm border border-gray-700">
+            <h2 className="text-xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300">
+              Transaction History
+            </h2>
             <div className="space-y-2 max-h-96 overflow-y-auto">
               {transactionHistory.map((tx, index) => (
                 <div
                   key={index}
                   className={`p-3 rounded ${
-                    tx.type === 'buy' ? 'bg-green-50' : 'bg-red-50'
+                    tx.type === 'buy'
+                      ? 'bg-green-900/20'
+                      : 'bg-red-900/20'
                   }`}
                 >
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className={`font-semibold ${
-                        tx.type === 'buy' ? 'text-green-600' : 'text-red-600'
-                      }`}>
+                      <span
+                        className={`font-semibold ${
+                          tx.type === 'buy'
+                            ? 'text-green-400'
+                            : 'text-red-400'
+                        }`}
+                      >
                         {tx.type.toUpperCase()}
                       </span>
-                      <span className="text-sm text-gray-600 ml-2">
+                      <span className="text-sm text-gray-400 ml-2">
                         {tx.amount.toFixed(6)} BTC
                       </span>
                     </div>
@@ -263,6 +305,9 @@ const TradeInterface = () => {
 };
 
 export default TradeInterface;
+
+
+// api code 
 
 // import { useState, useEffect } from 'react';
 // import { Line } from 'react-chartjs-2';

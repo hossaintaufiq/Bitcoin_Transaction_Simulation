@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
@@ -19,20 +20,32 @@ const FAQSection = () => {
   };
 
   return (
-    <div id="faq-section" className="bg-white py-12 px-6 md:px-16 lg:px-32">
-      <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+    <div id="faq-section" className="bg-gray-800/40 rounded-2xl backdrop-blur-lg border border-gray-700 p-8 mt-16 shadow-xl">
+      <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-300 text-center mb-8">
+        Frequently Asked Questions
+      </h2>
       <div className="max-w-3xl mx-auto space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className={`pb-3 ${index !== faqs.length - 1 ? "border-b" : ""}`}>
+          <div 
+            key={index} 
+            className={`pb-3 ${index !== faqs.length - 1 ? "border-b border-gray-700" : ""}`}
+          >
             <button
-              className="flex justify-between items-center w-full text-lg font-semibold text-left py-3 focus:outline-none"
+              className="flex justify-between items-center w-full text-lg font-semibold text-left py-3 px-4 rounded-lg hover:bg-gray-700/30 transition-all duration-300 text-white focus:outline-none"
               onClick={() => toggleFAQ(index)}
               aria-expanded={openIndex === index}
             >
               {faq.question}
-              {openIndex === index ? <FaMinus /> : <FaPlus />}
+              {openIndex === index ? 
+                <FaMinus className="text-blue-400" /> : 
+                <FaPlus className="text-blue-400" />
+              }
             </button>
-            {openIndex === index && <p className="mt-2 text-gray-600">{faq.answer}</p>}
+            {openIndex === index && 
+              <p className="mt-2 text-gray-300 px-4 animate-fade-in">
+                {faq.answer}
+              </p>
+            }
           </div>
         ))}
       </div>
